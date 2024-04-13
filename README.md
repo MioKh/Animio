@@ -12,5 +12,6 @@ jikan API documentation : https://docs.api.jikan.moe/seems a good place to start
 ## Progress so far
 
 - [x] Created the basic layout of the website (kinda hardcoded, will change later)
+- [x] Added styling to the website
 - [ ] Read the Jikan API documentation and started fetching data from the API
 - [ ] Displaying the data on the website
