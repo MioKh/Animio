@@ -4,10 +4,13 @@ This project dives into APIs and data fetching to create a platform for explorin
 ## Getting Started 
 so have a general idea how is this gonna work , and i dont think it should be that hard but lets see what happens for now this is the order in my brain 
 
-1. Create the general website layout (kinda hardcoded just to test)
-2. read the API documentation and fetch the data
-3. display the data on the website
-
 seems simple enough but i need to figure out how to do that :D
 
 jikan API documentation : https://docs.api.jikan.moe/seems a good place to start
+
+
+## Progress so far
+
+- [x] Created the basic layout of the website (kinda hardcoded, will change later)
+- [ ] Read the Jikan API documentation and started fetching data from the API
+- [ ] Displaying the data on the website
