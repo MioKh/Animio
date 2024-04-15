@@ -6,7 +6,7 @@ so have a general idea how is this gonna work , and i dont think it should be th
 
 seems simple enough but i need to figure out how to do that :D
 
-jikan API documentation : https://docs.api.jikan.moe/seems a good place to start
+jikan API documentation : https://docs.api.jikan.moe/  seems a good place to start
 
 
 ## Progress so far
