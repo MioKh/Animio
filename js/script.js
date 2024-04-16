@@ -46,7 +46,7 @@ function highlightActiveLink(){
 function init() {
   switch (global.currentPage) {
     case "/":
-    case "/index.html":
+    case "./index.html":
       displayPopularAnimes(); 
       break;
     case "manga":
