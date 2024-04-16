@@ -14,9 +14,9 @@ jikan API documentation : https://docs.api.jikan.moe/  seems a good place to sta
 - [x] **Basic Website Layout:** Created the initial layout structure of the website. (Currently hardcoded, subject to change)
 - [x] **Styling Implementation:** Added CSS styling to enhance the visual appearance of the website.
 - [x] **Jikan API Integration:** Explored the Jikan API documentation and initiated data fetching from the API.
-- [ ] **Data Display:** In progress. Working on displaying fetched data dynamically on the website.
+- [x] **Data Display:** In progress. Working on displaying fetched data dynamically on the website.
 - [ ] **Main Page Features:** Planning to implement features such as:
-  - [ ] **Top Popular Anime Display:** Showcasing the top 25 popular anime on the main page.
+  - [x] **Top Popular Anime Display:** Showcasing the top 25 popular anime on the main page.
   - [ ] **Search Functionality:** Implementing a search feature for users to explore anime and manga titles.
   - [ ] **Pagination:** Incorporating pagination for smoother navigation through search results.
   - [x] **Dynamic Routing:** Implemented basic routing functionality and active link highlighting for enhanced user experience.
