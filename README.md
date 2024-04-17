@@ -25,3 +25,8 @@ jikan API documentation : https://docs.api.jikan.moe/  seems a good place to sta
   - [x] **Manga Info Page:** Providing comprehensive information about manga series.
   - [x] **Search Results Page:** Designing a dedicated page to display search results with detailed information.
 - [ ] **Further Enhancements:** Exploring additional features and enhancements to improve overall functionality and user engagement.
+
+## refrence for code
+9 : display popular animes
+36 : display popular manga
+
