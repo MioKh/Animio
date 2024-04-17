@@ -1,3 +1,5 @@
+console.log('Hello this is a test to see if the js is even running');
+
 const global = {
   currentPage: window.location.pathname,
 };
@@ -42,11 +44,12 @@ function highlightActiveLink(){
     }
  });
 }
+
 //initlaize app
 function init() {
   switch (global.currentPage) {
     case "/":
-    case "./index.html":
+    case "/index.html":
       displayPopularAnimes(); 
       break;
     case "manga":
