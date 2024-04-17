@@ -62,7 +62,7 @@ function init() {
     console.log("manga-details");
   } else if (path === "search" || /^\/Animio\/search(\/)?$/.test(path)) {
     console.log("search");
-  }  // pls work
+  } 
 
   // AAA DAMN IT so i have been trying to fix this for a while and the fix is to add more cases cause github adds a whole new root file ? like if i run this localy it will work , but like the way i am using routing it changes in github cause for example index.html or just / becomes /Animio/index.html or /Animio/ , and i believe its same for all other pages
 
