@@ -119,21 +119,6 @@ async function displayAnimeDetails() {
 
   document.querySelector("#Anime-details").appendChild(div);
 }
-// test function for displaying backdrop images in anime details
-/* async function displayAnimeImages(){
-   const animeId = window.location.search.split("=")[1];
-   const { data } = await fetchApiData(`anime/${animeId}/pictures`);
-   const images = data.filter(picture => picture.jpg.large_image_url);
-   const randomImage = images[Math.floor(Math.random() * images.length)];
-   const div = document.createElement("div");
-   const imageContainer = document.createElement("div");
-   imageContainer.classList.add("image-container");
-   const img = document.createElement("img");
-   img.src = randomImage.jpg.large_image_url;
-   imageContainer.appendChild(img);
-   div.appendChild(imageContainer);
-   document.querySelector("#Anime-details").appendChild(div);
-*/
 
 async function displayMangaDetails() {
   const mangaId = window.location.search.split("=")[1];
@@ -194,25 +179,92 @@ async function displayMangaDetails() {
   document.querySelector("#manga-details").appendChild(div);
 }
 
+function getRandomItems(data, numItems) {
+  // Fisher-Yates shuffle algorithm
+  for (let i = data.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [data[i], data[j]] = [data[j], data[i]];
+  }
+  // Return the first numItems elements
+  return data.slice(0, numItems);
+}
+
 // display slider
-async function displaySlider() {
-  const { data } = await fetchApiData("recommendations/anime");
-  console.log(data);
+async function displayAnimeSlider() {
+  let { data } = await fetchApiData("recommendations/anime");
+
+  data = getRandomItems(data, 10);
   data.forEach((anime) => {
-    const div = document.createElement("div");
-    div.classList.add("swiper-slide");
+    // Access entry 0 and 1 for each anime
+    [0, 1].forEach((entryIndex) => {
+      const imageUrl = anime.entry[entryIndex].images.webp.large_image_url;
 
-    div.innerHTML = `
-    <a href="movie-details.html?id=${anime.mal_id}">
-      <img src="${anime.images.jpg.large_image_url}" alt="${anime.title}" />
-    </a>
-    <h4 class="swiper-rating">
-      <i class="fas fa-star text-secondary"></i> ${anime.score} / 10
-    </h4>
-    `;
+      // Now you can use imageUrl for further processing, e.g., creating HTML elements
+      const div = document.createElement("div");
+      div.classList.add("swiper-slide");
 
-    // document.querySelector(".swiper-wrapper").appendChild(div);
-    // (WIP) today maybe ?
+      div.innerHTML = `
+              <a href="#">
+                  <img src="${imageUrl}" alt="${anime.entry[entryIndex].title}" />
+              </a>
+              <h4 class="swiper-rating">
+                  <p>${anime.entry[entryIndex].title}</p>
+              </h4>
+          `;
+
+      // Append the created div to the swiper wrapper
+      document.querySelector(".swiper-wrapper").appendChild(div);
+
+      initSwiper();
+    });
+  });
+}
+
+async function displayMangaSlider() {
+  let { data } = await fetchApiData("recommendations/manga");
+  data = getRandomItems(data, 10);
+  data.forEach((anime) => {
+    // Access entry 0 and 1 for each anime
+    [0, 1].forEach((entryIndex) => {
+      const imageUrl = anime.entry[entryIndex].images.webp.large_image_url;
+
+      // Now you can use imageUrl for further processing, e.g., creating HTML elements
+      const div = document.createElement("div");
+      div.classList.add("swiper-slide");
+
+      div.innerHTML = `
+              <a href="#">
+                  <img src="${imageUrl}" alt="${anime.entry[entryIndex].title}" />
+              </a>
+              <h4 class="swiper-rating">
+                  <p>${anime.entry[entryIndex].title}</p>
+              </h4>
+          `;
+
+      // Append the created div to the swiper wrapper
+      document.querySelector(".swiper-wrapper").appendChild(div);
+
+      initSwiper();
+    });
+  });
+}
+
+function initSwiper() {
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      700: {
+        slidesPerView: 2,
+      },
+      1200: {
+        slidesPerView: 3,
+      },
+    },
+    autoplay: {
+      delay: 3000,
+    },
+    loop: true,
   });
 }
 
@@ -248,9 +300,10 @@ function highlightActiveLink() {
 function init() {
   if (/^\/(Animio\/)?(index\.html)?$/.test(path)) {
     displayPopularAnimes();
-    displaySlider();
+    displayAnimeSlider();
   } else if (/^\/(Animio\/)?manga\.html(\/)?$/.test(path)) {
     displayPopularMangas();
+    displayMangaSlider();
   } else if (/^\/(Animio\/)?anime-details\.html(\/)?$/.test(path)) {
     displayAnimeDetails();
     // displayAnimeImages();
