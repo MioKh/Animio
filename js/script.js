@@ -2,6 +2,15 @@ console.log("Hello this is a test to see if the js is even running");
 
 const global = {
   currentPage: window.location.pathname,
+  search: {
+    term: "",
+    type: "",
+    page: 1,
+    totalPages: 1,
+  },
+  api: {
+    api_url: "https://api.jikan.moe/v4/",
+  },
 };
 
 const path = global.currentPage;
@@ -179,6 +188,25 @@ async function displayMangaDetails() {
   document.querySelector("#manga-details").appendChild(div);
 }
 
+
+async function search() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  global.search.type = urlParams.get("type");
+  global.search.term = urlParams.get("search-term");
+  
+
+
+  // i have no idea why is this always running the else statement
+  if (global.search.term !== "" && global.search.term !== null) {
+    const results = await searchApiData();
+    console.log(results);
+  } else {
+    showAlert("Please Enter Search Term");
+  }
+}
+
 function getRandomItems(data, numItems) {
   // Fisher-Yates shuffle algorithm
   for (let i = data.length - 1; i > 0; i--) {
@@ -270,9 +298,19 @@ function initSwiper() {
 
 // gets the base api link ( then we concatenate with the endpoint )
 async function fetchApiData(endpoint) {
-  const API_URL = `https://api.jikan.moe/v4/`;
+  const API_URL = global.api.api_url;
   showSpinner();
   const respone = await fetch(`${API_URL}${endpoint}`);
+  const data = await respone.json();
+  hideSpinner();
+  return data;
+}
+
+// gets the search results from the api
+async function searchApiData() {
+  const API_URL = global.api.api_url;
+  showSpinner();
+  const respone = await fetch(`${API_URL}${global.search.type}?q=${global.search.term}`);
   const data = await respone.json();
   hideSpinner();
   return data;
@@ -296,6 +334,17 @@ function highlightActiveLink() {
   });
 }
 
+function showAlert(message, className) {
+  const alertEl = document.createElement("div");
+  alertEl.classList.add("alert", className);
+  alertEl.appendChild(document.createTextNode(message));
+  document.querySelector("#alert").appendChild(alertEl);
+
+  setTimeout(() => {
+    alertEl.remove();
+  }, 3000);
+}
+
 //a simple router function
 function init() {
   if (/^\/(Animio\/)?(index\.html)?$/.test(path)) {
@@ -311,7 +360,7 @@ function init() {
     displayMangaDetails();
     console.log("manga-details");
   } else if (/^\/(Animio\/)?search\.html(\/)?$/.test(path)) {
-    console.log("search");
+    search();
   }
   highlightActiveLink();
 }
