@@ -212,14 +212,43 @@ async function search() {
     displaySearchResults(data);
 
     document.querySelector("#search-term").value = "";
-
   } else {
     showAlert("Please Enter Search Term");
   }
 }
 
-function displaySearchResults(data){
-
+function displaySearchResults(data) {
+  data.forEach((data) => {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+      <a href="${global.search.type}-details.html?id=${data.mal_id}"> 
+      <img 
+      src="${data.images?.jpg?.large_image_url || "images/no-image.jpg"}" 
+      class="card-img-top" 
+      alt="${data.title || "No Image Available"}" 
+    />
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">${data.title}</h5>
+      <p class="card-text">
+        <small class="text-muted">${
+          global.search.type === "anime"
+            ? "Release Date"
+            : "Published Date" /* same here as below but for the naming */
+        }: ${
+      global.search.type === "anime"
+        ? data.aired.from.slice(0, 10)
+        : global.search.type === "manga"
+        ? data.published.from.slice(0, 10)
+        : "Unknown"
+    }  
+        </small>
+      </p>
+    </div>`;
+    /* checks if type is anime or manga and gets the date appropriately from the api  cause api have different namings for anime and manga */
+    document.querySelector("#search-results").appendChild(div);
+  });
 }
 
 function getRandomItems(data, numItems) {
