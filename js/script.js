@@ -188,23 +188,38 @@ async function displayMangaDetails() {
   document.querySelector("#manga-details").appendChild(div);
 }
 
-
 async function search() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   global.search.type = urlParams.get("type");
   global.search.term = urlParams.get("search-term");
-  
-
 
   // i have no idea why is this always running the else statement
   if (global.search.term !== "" && global.search.term !== null) {
-    const results = await searchApiData();
-    console.log(results);
+    const {
+      data,
+      pagination: {
+        items: { total },
+        current_page,
+      },
+    } = await searchApiData();
+    console.log(data, total, current_page);
+    if (data.length === 0) {
+      showAlert("No results found");
+      return;
+    }
+    displaySearchResults(data);
+
+    document.querySelector("#search-term").value = "";
+
   } else {
     showAlert("Please Enter Search Term");
   }
+}
+
+function displaySearchResults(data){
+
 }
 
 function getRandomItems(data, numItems) {
@@ -310,7 +325,9 @@ async function fetchApiData(endpoint) {
 async function searchApiData() {
   const API_URL = global.api.api_url;
   showSpinner();
-  const respone = await fetch(`${API_URL}${global.search.type}?q=${global.search.term}`);
+  const respone = await fetch(
+    `${API_URL}${global.search.type}?q=${global.search.term}`
+  );
   const data = await respone.json();
   hideSpinner();
   return data;
@@ -334,7 +351,7 @@ function highlightActiveLink() {
   });
 }
 
-function showAlert(message, className) {
+function showAlert(message, className = "error") {
   const alertEl = document.createElement("div");
   alertEl.classList.add("alert", className);
   alertEl.appendChild(document.createTextNode(message));
