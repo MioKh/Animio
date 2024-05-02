@@ -276,7 +276,7 @@ async function displayAnimeSlider() {
       div.classList.add("swiper-slide");
 
       div.innerHTML = `
-              <a href="#">
+              <a href="anime-details.html?id=${anime.entry[entryIndex].mal_id}">
                   <img src="${imageUrl}" alt="${anime.entry[entryIndex].title}" />
               </a>
               <h4 class="swiper-rating">
@@ -305,7 +305,7 @@ async function displayMangaSlider() {
       div.classList.add("swiper-slide");
 
       div.innerHTML = `
-              <a href="#">
+              <a href="manga-details.html?id=${anime.entry[entryIndex].mal_id}">
                   <img src="${imageUrl}" alt="${anime.entry[entryIndex].title}" />
               </a>
               <h4 class="swiper-rating">
