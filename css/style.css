@@ -94,7 +94,7 @@ ul {
 
 .main-header {
   padding: 20px 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--color-primary);
 }
 
 .main-header .logo {
@@ -262,8 +262,7 @@ section h2 {
   margin-top: 20px;
 }
 
-.details-bottom {
-}
+
 
 .details-bottom li {
   margin: 15px 0;

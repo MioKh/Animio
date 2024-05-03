@@ -323,8 +323,9 @@ async function displayMangaSlider() {
 
 function initSwiper() {
   const swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
+    slidesPerView: 3,
+    freeMode: true,
+    loop: true,
     breakpoints: {
       700: {
         slidesPerView: 2,
@@ -333,10 +334,6 @@ function initSwiper() {
         slidesPerView: 3,
       },
     },
-    autoplay: {
-      delay: 3000,
-    },
-    loop: true,
   });
 }
 
