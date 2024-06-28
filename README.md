@@ -1,4 +1,5 @@
 # Animio
+Live Demo : https://miokh.github.io/Animio/index.html
 This project dives into APIs and data fetching to create a platform for exploring popular anime and manga. Users can easily search and access details on their favorite titles.
 
 ## Getting Started 
@@ -18,7 +19,7 @@ jikan API documentation : https://docs.api.jikan.moe/  seems a good place to sta
 - [ ] **Main Page Features:** Planning to implement features such as:
   - [x] **Top Popular Anime Display:** Showcasing the top 25 popular anime on the main page.
   - [x] **Added a Swiper Presentation:** Incorporating a popular anime and manga presentation on the main page.
-  - [ ] **Search Functionality:** Implementing a search feature for users to explore anime and manga titles.
+  - [x] **Search Functionality:** Implementing a search feature for users to explore anime and manga titles.
   - [ ] **Pagination:** Incorporating pagination for smoother navigation through search results.
   - [x] **Dynamic Routing:** Implemented basic routing functionality and active link highlighting for enhanced user experience.
 - [x] **Additional Pages:** Considering adding pages such as:
